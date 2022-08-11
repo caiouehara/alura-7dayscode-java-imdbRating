@@ -6,6 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -29,9 +30,12 @@ public class Teste {
 		   
 		   JsonParser parser = new JsonParser();
 		   List<Map<String, String>> data = parser.parse(response.body());
-		   System.out.println(data.get(0));
+		   List<Movie> movies = new ArrayList<>();
 		   
-		   
+		   for(Map<String, String> item : data) {
+			   Movie movie = new Movie(item.get("title"), item.get("url"), item.get("rating"), item.get("year"));
+			   movies.add(movie);
+		   }
 	}
 	
 }
